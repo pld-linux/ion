@@ -8,6 +8,7 @@ Group:		X11/Window Managers
 Source0:	http://modeemi.cs.tut.fi/~tuomov/dl/%{name}-devel-%{version}.tar.gz
 # Source0-md5:	07da07e2ac4e20855d5621f1111bd09b
 Source1:	%{name}.desktop
+Source2:        %{name}-xsession.desktop
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-no_devel.patch
 Patch2:		%{name}-edit.patch
@@ -42,12 +43,13 @@ Jest szybki i zajmuje ma³o zasobów.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_wmpropsdir}
+install -d $RPM_BUILD_ROOT{%{_datadir}/xsessions,%{_wmpropsdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_wmpropsdir}
+install %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/xsessions/%{name}.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -59,5 +61,6 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not size, mtime, md5) %{_sysconfdir}/X11/ion/*
 %attr(755,root,root) %{_bindir}/*
 %{_libdir}/ion-devel/*
+%{_datadir}/xsessions/%{name}.desktop
 %{_wmpropsdir}/ion.desktop
 %{_mandir}/man1/*
