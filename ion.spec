@@ -12,7 +12,7 @@ Source2:	%{name}-xsession.desktop
 URL:		http://iki.fi/tuomov/ion/
 BuildRequires:	XFree86-devel
 BuildRequires:	libltdl-devel
-BuildRequires:	libtool
+BuildRequires:	libtool >= 1.4.3
 BuildRequires:	lua50 >= 5.0.2-2
 BuildRequires:	lua50-devel >= 5.0.2-2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -32,6 +32,7 @@ Jest szybki i zajmuje ma³o zasobów.
 
 %build
 %configure \
+	--disable-static \
 	--with-lua-suffix=50 \
 	--with-lua-includes=%{_includedir}/lua50
 %{__make}
@@ -64,9 +65,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/ion
 %attr(755,root,root) %{_libdir}/ion/*.so
-%attr(755,root,root) %{_libdir}/ion/*.la
+# used (lt_dlopen)
+%{_libdir}/ion/*.la
 %attr(755,root,root) %{_libdir}/ion/ion-completefile
-%{_libdir}/ion/*.a
 %{_libdir}/ion/lc
 %dir %{_datadir}/ion
 %{_datadir}/ion/delib.lc
