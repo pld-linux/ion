@@ -36,7 +36,7 @@ Jest szybki i zajmuje ma³o zasobów.
 %build
 %{__make} \
 	HAS_SYSTEM_ASPRINTF=1 \
-	OPTFLAGS="%{optflags}" \
+	OPTFLAGS="%{rpmcflags}" \
 	CC=%{__cc}
 
 %install
