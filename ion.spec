@@ -60,7 +60,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/X11/ion-devel/*
 %attr(755,root,root) %{_bindir}/*
 # %{_libdir}/ion-devel/*.so instead? chmod +x them?
-%{_libdir}/ion-devel/*
+%{_libdir}/ion-devel
 %{_datadir}/xsessions/%{name}.desktop
 %{_wmpropsdir}/ion.desktop
 %{_mandir}/man1/*
