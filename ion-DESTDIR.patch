@@ -1,19 +1,20 @@
---- ion-devel-20020413/system.mk~	Mon Apr 29 18:51:05 2002
-+++ ion-devel-20020413/system.mk	Mon Apr 29 18:54:30 2002
-@@ -7,11 +7,11 @@
+--- ion-devel-20030225/system.mk.orig	Tue Feb 25 23:28:28 2003
++++ ion-devel-20030225/system.mk	Tue Feb 25 23:29:19 2003
+@@ -7,13 +7,13 @@
  ## Installation paths
  ##
  
 -PREFIX=/usr/local/ion-devel
-+PREFIX=$(DESTDIR)/usr/X11R6
++PREFIX=$(DESTDIR)/usr
  
  # No need to modify these usually
  BINDIR=$(PREFIX)/bin
 -ETCDIR=$(PREFIX)/etc
 +ETCDIR=$(DESTDIR)/etc/X11
- MANDIR=$(PREFIX)/man
+-MANDIR=$(PREFIX)/man
++MANDIR=$(PREFIX)/share/man
 -DOCDIR=$(PREFIX)/doc
 +DOCDIR=$(PREFIX)/share/doc
- # Not used
- INCDIR=$(PREFIX)/include
  LIBDIR=$(PREFIX)/lib
+ INCDIR=$(PREFIX)/include
+ 
