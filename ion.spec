@@ -8,7 +8,7 @@ Group:		X11/Window Managers
 Group(de):	X11/Fenstermanager
 Group(pl):	X11/Zarz±dcy Okien
 Source0:	http://www.students.tut.fi/~tuomov/dl/%{name}-%{version}.tar.gz
-Soutrce1:	%{name}.desktop
+Source1:	%{name}.desktop
 Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.students.tut.fi/~tuomov/ion/
 BuildRequires:	XFree86-devel
