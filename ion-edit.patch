@@ -1,0 +1,19 @@
+--- ion-devel-20020605/scripts/ion-edit.orig	2002-04-05 01:34:21.000000000 +0200
++++ ion-devel-20020605/scripts/ion-edit	2002-06-09 21:36:24.000000000 +0200
+@@ -1,2 +1,4 @@
+ #!/bin/sh
+-exec run-mailcap --action=edit "$1" > /dev/null
++
++[ -z "$EDITOR" ] && EDITOR=vi
++exec $EDITOR "$1" > /dev/null
+--- ion-devel-20020605/scripts/ion-view.orig	2002-04-05 01:34:21.000000000 +0200
++++ ion-devel-20020605/scripts/ion-view	2002-06-09 21:37:22.000000000 +0200
+@@ -2,6 +2,7 @@
+ if echo "$1"|grep -E '^([a-zA-Z]+://|www.)' > /dev/null; then
+ 	exec netscape-remote "$1"
+ else
+-	exec run-mailcap --action=view "$1" > /dev/null
++	[ -z "$VIEWER" ] && VIEWER=more
++	exec $VIEWER "$1" > /dev/null
+ fi
+ 
