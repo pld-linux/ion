@@ -8,6 +8,7 @@ Group:		X11/Window Managers
 Group(de):	X11/Fenstermanager
 Group(pl):	X11/Zarz±dcy Okien
 Source0:	http://www.students.tut.fi/~tuomov/dl/%{name}-%{version}.tar.gz
+Soutrce1:	%{name}.desktop
 Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.students.tut.fi/~tuomov/ion/
 BuildRequires:	XFree86-devel
@@ -33,8 +34,12 @@ Jest szybki i zajmuje ma³o zasobów.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_datadir}/wm-properties
 
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/wm-properties/
 
 gzip -9nf doc/* README ChangeLog
 
@@ -46,5 +51,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc doc/*.gz *.gz
 %dir %{_sysconfdir}/X11/ion
 %config(noreplace) %verify(not size, mtime, md5) %{_sysconfdir}/X11/ion/*
-%attr(755,root,root) %{_prefix}/bin/*
+%attr(755,root,root) %{_bindir}/*
+%{_datadir}/wm-properties/ion.desktop
 %{_mandir}/man1/*
