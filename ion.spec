@@ -1,5 +1,5 @@
 Summary:	Ion - an X11 window manager
-Summary(pl):	Ion - mened¿er okien dla X11
+Summary(pl):	Ion - zarz±dca okien dla X11
 Name:		ion
 Version:	20020926
 Release:	1
@@ -23,7 +23,7 @@ Ion is a keyboard-friendly X11 window manager. It is fast and takes up
 little resources.
 
 %description -l pl
-Ion jest mened¿erem okien, obs³ugiwanym prawie wy³±cznie z klawiatury.
+Ion jest zarz±dc± okien, obs³ugiwanym prawie wy³±cznie z klawiatury.
 Jest szybki i zajmuje ma³o zasobów.
 
 %prep
