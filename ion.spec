@@ -1,21 +1,19 @@
-Summary:	Ion - an X11 window manager
-Summary(pl):	Ion - zarz±dca okien dla X11
+Summary:	A tiling tabbed X11 window manager
+Summary(pl):	Zarz±dca okien dla X11
 Name:		ion
-Version:	20030416
-Release:	5
-License:	Artistic
+Version:	20040729
+Release:	1
+License:	LGPL
 Group:		X11/Window Managers
-Source0:	http://modeemi.cs.tut.fi/~tuomov/dl/%{name}-devel-%{version}.tar.gz
-# Source0-md5:	07da07e2ac4e20855d5621f1111bd09b
+Source0:	http://modeemi.fi/~tuomov/ion/dl/%{name}-2-%{version}.tar.gz
+# Source0-md5:	d7d98baa41635c1989e423adf76eb2ac
 Source1:	%{name}.desktop
 Source2:	%{name}-xsession.desktop
-Patch0:		%{name}-DESTDIR.patch
-Patch1:		%{name}-edit.patch
-Patch2:		%{name}-OPT.patch
-Patch3:		%{name}-va.patch
-URL:		http://modeemi.fi/~tuomov/ion/
+URL:		http://iki.fi/tuomov/ion/
 BuildRequires:	XFree86-devel
 BuildRequires:	libltdl-devel
+BuildRequires:	libtool
+BuildRequires:	lua50 >= 5.0.2-2
 BuildRequires:	lua50-devel >= 5.0.2-2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -30,29 +28,27 @@ Ion jest zarz±dc± okien, obs³ugiwanym prawie wy³±cznie z klawiatury.
 Jest szybki i zajmuje ma³o zasobów.
 
 %prep
-%setup -q -n %{name}-devel-%{version}
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
+%setup -q -n %{name}-2-%{version}
 
 %build
-%{__make} \
-	HAS_SYSTEM_ASPRINTF=1 \
-	OPTFLAGS="%{rpmcflags}" \
-	CC="%{__cc}" \
-	LUA_INCLUDES="-I/usr/include/lua50" \
-	LUA_LIBS="-llua50 -llualib50" \
-	X11_LIBS="-L/usr/X11R6/%{_lib} -lX11 -lXext" \
-	LIBDIR=%{_libdir}
+%configure \
+	--with-lua-suffix=50 \
+	--with-lua-includes=%{_includedir}/lua50
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_datadir}/xsessions,%{_wmpropsdir}}
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	LIBDIR=$RPM_BUILD_ROOT%{_libdir}
+	MODULEDIR=%{buildroot}%{_libdir}/ion \
+	SHAREDIR=%{buildroot}%{_datadir}/ion \
+	LCDIR=%{buildroot}%{_libdir}/ion/lc \
+	ETCDIR=%{buildroot}%{_sysconfdir}/ion \
+	BINDIR=%{buildroot}%{_bindir} \
+	EXTRABINDIR=%{buildroot}%{_libdir}/ion \
+	MANDIR=%{buildroot}%{_mandir} \
+	DOCDIR=%{buildroot}%{_docdir}/%{name}-%{version}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_wmpropsdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/xsessions/%{name}.desktop
@@ -62,12 +58,21 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README ChangeLog
-%dir %{_sysconfdir}/X11/ion-devel
-%config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/X11/ion-devel/*
+%doc %{_docdir}/%{name}-%{version}
+%dir %{_sysconfdir}/ion
+%config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/ion/*
 %attr(755,root,root) %{_bindir}/*
-# %{_libdir}/ion-devel/*.so instead? chmod +x them?
-%{_libdir}/ion-devel
+%dir %{_libdir}/ion
+%attr(755,root,root) %{_libdir}/ion/*.so
+%attr(755,root,root) %{_libdir}/ion/*.la
+%attr(755,root,root) %{_libdir}/ion/ion-completefile
+%{_libdir}/ion/*.a
+%{_libdir}/ion/lc
+%dir %{_datadir}/ion
+%{_datadir}/ion/delib.lc
+%{_datadir}/ion/*.lua
+%attr(755,root,root) %{_datadir}/ion/ion-*
+%{_datadir}/ion/welcome_message.txt
 %{_datadir}/xsessions/%{name}.desktop
 %{_wmpropsdir}/ion.desktop
 %{_mandir}/man1/*
