@@ -1,7 +1,7 @@
 Summary:	Ion - an X11 window manager
 Summary(pl):	Ion - mened¿er okien dla X11
 Name:		ion
-Version:	20010523
+Version:	20020120
 Release:	1
 License:	Artistic
 Group:		X11/Window Managers
