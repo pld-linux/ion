@@ -2,7 +2,7 @@ Summary:	Ion - an X11 window manager
 Summary(pl):	Ion - zarz±dca okien dla X11
 Name:		ion
 Version:	20030416
-Release:	4
+Release:	5
 License:	Artistic
 Group:		X11/Window Managers
 Source0:	http://modeemi.cs.tut.fi/~tuomov/dl/%{name}-devel-%{version}.tar.gz
@@ -12,6 +12,7 @@ Source2:	%{name}-xsession.desktop
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-edit.patch
 Patch2:		%{name}-OPT.patch
+Patch3:		%{name}-va.patch
 URL:		http://modeemi.fi/~tuomov/ion/
 BuildRequires:	XFree86-devel
 BuildRequires:	libltdl-devel
@@ -33,6 +34,7 @@ Jest szybki i zajmuje ma³o zasobów.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__make} \
@@ -40,14 +42,17 @@ Jest szybki i zajmuje ma³o zasobów.
 	OPTFLAGS="%{rpmcflags}" \
 	CC="%{__cc}" \
 	LUA_INCLUDES="-I/usr/include/lua50" \
-	LUA_LIBS="-llua50 -llualib50"
+	LUA_LIBS="-llua50 -llualib50" \
+	X11_LIBS="-L/usr/X11R6/%{_lib} -lX11 -lXext" \
+	LIBDIR=%{_libdir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_datadir}/xsessions,%{_wmpropsdir}}
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	LIBDIR=$RPM_BUILD_ROOT%{_libdir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_wmpropsdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/xsessions/%{name}.desktop
