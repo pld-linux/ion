@@ -1,8 +1,8 @@
 Summary:	Ion - an X11 window manager
 Summary(pl):	Ion - zarz±dca okien dla X11
 Name:		ion
-Version:	20030327
-Release:	1
+Version:	20030416
+Release:	2
 License:	Artistic
 Group:		X11/Window Managers
 Source0:	http://modeemi.cs.tut.fi/~tuomov/dl/%{name}-devel-%{version}.tar.gz
@@ -13,6 +13,7 @@ Patch2:		%{name}-edit.patch
 Patch3:		%{name}-OPT.patch
 URL:		http://www.students.tut.fi/~tuomov/ion/
 BuildRequires:	XFree86-devel
+BuildRequires:	lua50-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_wmpropsdir	/usr/share/wm-properties
@@ -52,7 +53,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc doc/*.txt README ChangeLog
+%doc README ChangeLog
 %dir %{_sysconfdir}/X11/ion
 %config(noreplace) %verify(not size, mtime, md5) %{_sysconfdir}/X11/ion/*
 %attr(755,root,root) %{_bindir}/*
