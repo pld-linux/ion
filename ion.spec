@@ -6,6 +6,7 @@ Release:	2
 License:	Artistic
 Group:		X11/Window Managers
 Source0:	http://modeemi.cs.tut.fi/~tuomov/dl/%{name}-devel-%{version}.tar.gz
+# Source0-md5:	07da07e2ac4e20855d5621f1111bd09b
 Source1:	%{name}.desktop
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-no_devel.patch
