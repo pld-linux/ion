@@ -1,10 +1,9 @@
---- ion-devel-20020413/system.mk~	Mon Apr 29 18:58:25 2002
-+++ ion-devel-20020413/system.mk	Mon Apr 29 18:59:51 2002
-@@ -85,8 +85,8 @@
- 	-Wtrigraphs -Wformat -Wchar-subscripts \
- 	-Wparentheses -pedantic-errors -Wuninitialized
+--- ion-devel-20030416/system.mk.orig	Mon Apr 21 23:27:14 2003
++++ ion-devel-20030416/system.mk	Mon Apr 21 23:27:44 2003
+@@ -131,7 +131,8 @@
  
--
+ C99_SOURCE=-std=c99
+ 
 -CFLAGS=-g -O2 $(WARN) $(DEFINES) $(INCLUDES) $(EXTRA_INCLUDES)
 +OPTFLAGS=-g -O2
 +CFLAGS=$(OPTFLAGS) $(WARN) $(DEFINES) $(INCLUDES) $(EXTRA_INCLUDES)
