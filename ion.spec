@@ -15,6 +15,7 @@ URL:		http://www.students.tut.fi/~tuomov/ion/
 BuildRequires:	XFree86-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		_wmpropsdir	/usr/share/wm-properties
 
 %description
 Ion is a keyboard-friendly X11 window manager. It is fast and takes up
@@ -39,12 +40,12 @@ Jest szybki i zajmuje ma³o zasobów.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_datadir}/wm-properties
+install -d $RPM_BUILD_ROOT%{_wmpropsdir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/wm-properties/
+install %{SOURCE1} $RPM_BUILD_ROOT%{_wmpropsdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -55,5 +56,5 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/X11/ion
 %config(noreplace) %verify(not size, mtime, md5) %{_sysconfdir}/X11/ion/*
 %attr(755,root,root) %{_bindir}/*
-%{_datadir}/wm-properties/ion.desktop
+%{_wmpropsdir}/ion.desktop
 %{_mandir}/man1/*
