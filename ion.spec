@@ -1,13 +1,16 @@
 Summary:	Ion - an X11 window manager
 Summary(pl):	Ion - mened¿er okien dla X11
 Name:		ion
-Version:	20020207
+Version:	20020926
 Release:	2
 License:	Artistic
 Group:		X11/Window Managers
-Source0:	http://www.students.tut.fi/~tuomov/dl/%{name}-%{version}.tar.gz
+Source0:	http://www.students.tut.fi/~tuomov/dl/%{name}-devel-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-DESTDIR.patch
+Patch1:		%{name}-no_devel.patch
+Patch2:		%{name}-edit.patch
+Patch3:		%{name}-OPT.patch
 URL:		http://www.students.tut.fi/~tuomov/ion/
 BuildRequires:	XFree86-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -24,11 +27,17 @@ Ion jest mened¿erem okien, obs³ugiwanym prawie wy³±cznie z klawiatury.
 Jest szybki i zajmuje ma³o zasobów.
 
 %prep
-%setup -q
+%setup -q -n %{name}-devel-%{version}
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
-%{__make} all HAS_SYSTEM_ASPRINTF=1
+%{__make} \
+	HAS_SYSTEM_ASPRINTF=1 \
+	OPTFLAGS="%{optflags}" \
+	CC=%{__cc}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -44,7 +53,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc doc/* README ChangeLog
+%doc doc/*.txt README ChangeLog
 %dir %{_sysconfdir}/X11/ion
 %config(noreplace) %verify(not size, mtime, md5) %{_sysconfdir}/X11/ion/*
 %attr(755,root,root) %{_bindir}/*
