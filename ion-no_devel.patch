@@ -1,0 +1,22 @@
+--- ion-devel-20020605/src/main.c~	2002-05-26 16:40:57.000000000 +0200
++++ ion-devel-20020605/src/main.c	2002-06-11 20:21:09.000000000 +0200
+@@ -96,7 +96,7 @@
+ 	wglobal.argc=argc;
+ 	wglobal.argv=argv;
+ 	
+-	if(!wmcore_init("ion-devel", ETCDIR, display, onescreen))
++	if(!wmcore_init("ion", ETCDIR, display, onescreen))
+ 		return EXIT_FAILURE;
+ 	
+ 	init_funclists();
+--- ion-devel-20020605/Makefile~	2002-06-06 01:11:12.000000000 +0200
++++ ion-devel-20020605/Makefile	2002-06-11 20:20:56.000000000 +0200
+@@ -23,7 +23,7 @@
+ DOCS= 	README LICENSE ChangeLog \
+ 	doc/config.txt doc/functions.txt doc/draw.txt doc/query.txt
+ 
+-IONETCDIR=$(ETCDIR)/ion-devel
++IONETCDIR=$(ETCDIR)/ion
+ 
+ ######################################
+ 
