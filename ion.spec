@@ -15,8 +15,6 @@ URL:		http://www.students.tut.fi/~tuomov/ion/
 BuildRequires:	XFree86-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_prefix		/usr/X11R6
-%define		_mandir		%{_prefix}/man
 
 %description
 Ion is a keyboard-friendly X11 window manager. It is fast and takes up
