@@ -2,7 +2,7 @@ Summary:	Ion - an X11 window manager
 Summary(pl):	Ion - zarz±dca okien dla X11
 Name:		ion
 Version:	20030416
-Release:	3
+Release:	4
 License:	Artistic
 Group:		X11/Window Managers
 Source0:	http://modeemi.cs.tut.fi/~tuomov/dl/%{name}-devel-%{version}.tar.gz
@@ -10,12 +10,12 @@ Source0:	http://modeemi.cs.tut.fi/~tuomov/dl/%{name}-devel-%{version}.tar.gz
 Source1:	%{name}.desktop
 Source2:	%{name}-xsession.desktop
 Patch0:		%{name}-DESTDIR.patch
-Patch2:		%{name}-edit.patch
-Patch3:		%{name}-OPT.patch
+Patch1:		%{name}-edit.patch
+Patch2:		%{name}-OPT.patch
 URL:		http://modeemi.fi/~tuomov/ion/
 BuildRequires:	XFree86-devel
 BuildRequires:	libltdl-devel
-BuildRequires:	lua50-devel
+BuildRequires:	lua50-devel >= 5.0.2-2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_wmpropsdir	/usr/share/wm-properties
@@ -31,14 +31,16 @@ Jest szybki i zajmuje ma³o zasobów.
 %prep
 %setup -q -n %{name}-devel-%{version}
 %patch0 -p1
+%patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %build
 %{__make} \
 	HAS_SYSTEM_ASPRINTF=1 \
 	OPTFLAGS="%{rpmcflags}" \
-	CC=%{__cc}
+	CC="%{__cc}" \
+	LUA_INCLUDES="-I/usr/include/lua50" \
+	LUA_LIBS="-llua50 -llualib50"
 
 %install
 rm -rf $RPM_BUILD_ROOT
