@@ -1,11 +1,11 @@
 Summary:	Ion - an X11 window manager
 Summary(pl):	Ion - zarz±dca okien dla X11
 Name:		ion
-Version:	20030225
+Version:	20030311
 Release:	1
 License:	Artistic
 Group:		X11/Window Managers
-Source0:	http://modeemi.cs.tut.fi/~tuomov/dl/%{name}-devel-%{version}.tar.gz
+Source0:	http://modeemi.cs.tut.fi/~tuomov/dl/%{name}-devel-%{version}-1.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-no_devel.patch
@@ -26,7 +26,7 @@ Ion jest zarz±dc± okien, obs³ugiwanym prawie wy³±cznie z klawiatury.
 Jest szybki i zajmuje ma³o zasobów.
 
 %prep
-%setup -q -n %{name}-devel-%{version}
+%setup -q -n %{name}-devel-%{version}-1
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -56,5 +56,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/X11/ion
 %config(noreplace) %verify(not size, mtime, md5) %{_sysconfdir}/X11/ion/*
 %attr(755,root,root) %{_bindir}/*
+%{_libdir}/ion-devel/*
 %{_wmpropsdir}/ion.desktop
 %{_mandir}/man1/*
