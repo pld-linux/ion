@@ -2,19 +2,19 @@ Summary:	Ion - an X11 window manager
 Summary(pl):	Ion - zarz±dca okien dla X11
 Name:		ion
 Version:	20030416
-Release:	2
+Release:	3
 License:	Artistic
 Group:		X11/Window Managers
 Source0:	http://modeemi.cs.tut.fi/~tuomov/dl/%{name}-devel-%{version}.tar.gz
 # Source0-md5:	07da07e2ac4e20855d5621f1111bd09b
 Source1:	%{name}.desktop
-Source2:        %{name}-xsession.desktop
+Source2:	%{name}-xsession.desktop
 Patch0:		%{name}-DESTDIR.patch
-Patch1:		%{name}-no_devel.patch
 Patch2:		%{name}-edit.patch
 Patch3:		%{name}-OPT.patch
-URL:		http://www.students.tut.fi/~tuomov/ion/
+URL:		http://modeemi.fi/~tuomov/ion/
 BuildRequires:	XFree86-devel
+BuildRequires:	libltdl-devel
 BuildRequires:	lua50-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -31,7 +31,6 @@ Jest szybki i zajmuje ma³o zasobów.
 %prep
 %setup -q -n %{name}-devel-%{version}
 %patch0 -p1
-%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 
@@ -57,9 +56,10 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README ChangeLog
-%dir %{_sysconfdir}/X11/ion
-%config(noreplace) %verify(not size, mtime, md5) %{_sysconfdir}/X11/ion/*
+%dir %{_sysconfdir}/X11/ion-devel
+%config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/X11/ion-devel/*
 %attr(755,root,root) %{_bindir}/*
+# %{_libdir}/ion-devel/*.so instead? chmod +x them?
 %{_libdir}/ion-devel/*
 %{_datadir}/xsessions/%{name}.desktop
 %{_wmpropsdir}/ion.desktop
