@@ -61,7 +61,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc %{_docdir}/%{name}-%{version}
 %dir %{_sysconfdir}/ion
-%config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/ion/*
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/ion/*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/ion
 %attr(755,root,root) %{_libdir}/ion/*.so
