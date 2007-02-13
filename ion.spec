@@ -1,5 +1,5 @@
 Summary:	A tiling tabbed X11 window manager
-Summary(pl.UTF-8):   Zarządca okien dla X11
+Summary(pl.UTF-8):	Zarządca okien dla X11
 Name:		ion
 Version:	20040729
 Release:	1
